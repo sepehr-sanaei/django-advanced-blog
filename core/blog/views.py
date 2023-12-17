@@ -1,8 +1,21 @@
-from typing import Any
-from django.db.models.query import QuerySet
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic.base import TemplateView, RedirectView
+from django.views.generic import (
+    ListView,
+    DetailView,
+    FormView,
+    CreateView,
+    UpdateView,
+    DeleteView,
+)
+from django.http import HttpResponse
 from .models import Post
+from django.shortcuts import get_object_or_404
+from blog.forms import PostForm
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin,
+    PermissionRequiredMixin,
+)
 # Create your views here.
 class IndexView(TemplateView):
     template_name = 'index.html'
@@ -14,16 +27,39 @@ class IndexView(TemplateView):
         context['posts'] = Post.objects.all()
         return context
     
-class PostView(ListView):
-    # model = Post
+class PostListView(ListView):
+    permission_required = "blog.view_post"
     queryset = Post.objects.all()
-    context_object_name = 'posts'
-    ordering = '-id'
-    
+    # model = Post
+    context_object_name = "posts"
+    # paginate_by = 2
+    ordering = "-id"
     # def get_queryset(self):
     #     posts = Post.objects.filter(status=True)
     #     return posts
-    
-    
-class PostDetailView(DetailView):
+
+
+class PostDetailView(LoginRequiredMixin, DetailView):
     model = Post
+    
+    
+class PostCreateView(LoginRequiredMixin, CreateView):
+    model = Post
+    # fields = ['author', 'title', 'content','status', 'category', 'published_date']
+    form_class = PostForm
+    success_url = "/blog/post/"
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+
+class PostEditView(LoginRequiredMixin, UpdateView):
+    model = Post
+    form_class = PostForm
+    success_url = "/blog/post/"
+
+
+class PostDeleteView(LoginRequiredMixin, DeleteView):
+    model = Post
+    success_url = "/blog/post/"
