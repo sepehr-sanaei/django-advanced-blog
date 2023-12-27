@@ -16,6 +16,8 @@ from django.contrib.auth.mixins import (
     LoginRequiredMixin,
     PermissionRequiredMixin,
 )
+
+
 # Create your views here.
 class IndexView(TemplateView):
     template_name = 'index.html'
@@ -63,3 +65,4 @@ class PostEditView(LoginRequiredMixin, UpdateView):
 class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
     success_url = "/blog/post/"
+    
