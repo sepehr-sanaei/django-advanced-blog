@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'accounts',
     'blog',
     'rest_framework',
-]
+    'django_filters',
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -136,3 +137,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # User model config
 AUTH_USER_MODEL = "accounts.User"
+
+# rest_framework configuration settings
+REST_FRAMEWORK = { 'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' }
