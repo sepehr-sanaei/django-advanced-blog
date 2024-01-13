@@ -9,7 +9,7 @@ from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnl
 from accounts.models import User
 from ...models import Profiles
 from django.shortcuts import get_object_or_404
-from django.core.mail import send_mail
+from mail_templated import send_mail
 # import necessary libraries here
 
 class RegistrationApiView(generics.GenericAPIView):
@@ -82,13 +82,7 @@ class ProfileApiView(generics.RetrieveUpdateAPIView):
     
 class TestEmail(generics.GenericAPIView):
     def get(self,request, *args, **kwargs):
-        send_mail(
-            "test email",
-            "This is a test email to check the terminal email",
-            "sepehr.sae.81@gmail.com",
-            ["sepehr.sanaie.81@gmail.com"],
-            fail_silently=False,
-        )
+        send_mail('email/hello.tpl', {'name': 'sepehr'}, 'admin@admin.com', ['sepehr.sae.81@gmail.com'])
         return Response("Email sent successfully")
 
         
