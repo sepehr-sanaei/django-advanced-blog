@@ -20,15 +20,16 @@ from django.contrib.auth.mixins import (
 
 # Create your views here.
 class IndexView(TemplateView):
-    template_name = 'index.html'
-    
+    template_name = "index.html"
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
-        context['name'] = 'man intin'
-        context['posts'] = Post.objects.all()
+
+        context["name"] = "man intin"
+        context["posts"] = Post.objects.all()
         return context
-    
+
+
 class PostListView(ListView):
     permission_required = "blog.view_post"
     queryset = Post.objects.all()
@@ -43,8 +44,8 @@ class PostListView(ListView):
 
 class PostDetailView(LoginRequiredMixin, DetailView):
     model = Post
-    
-    
+
+
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     # fields = ['author', 'title', 'content','status', 'category', 'published_date']
@@ -65,4 +66,3 @@ class PostEditView(LoginRequiredMixin, UpdateView):
 class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
     success_url = "/blog/post/"
-    
