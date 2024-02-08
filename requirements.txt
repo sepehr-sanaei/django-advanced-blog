@@ -8,3 +8,4 @@ drf-yasg[validation]
 coreapi
 djangorestframework-simplejwt
 django-mail-templated
+djoser
