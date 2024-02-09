@@ -37,6 +37,7 @@ urlpatterns = [
         name="change-password",
     ),
     # reset password
+    # path("reset-password/", views.ResetPasswordApiView.as_view(), name="reset-password"),
     # logout
     path(
         "api-token-logout/",

@@ -9,3 +9,6 @@ coreapi
 djangorestframework-simplejwt
 django-mail-templated
 djoser
+# clean code
+black
+flake8
