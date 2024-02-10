@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework.permissions import (
     IsAuthenticated,
     IsAuthenticatedOrReadOnly,
+    AllowAny,
 )
 from rest_framework.views import APIView
 from rest_framework.generics import (
@@ -52,8 +53,9 @@ def post_list(request):
 """
 
 
+# /blog/api/v1/post is connected to PostModelViewSet not PostList
 class PostList(ListCreateAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     serializer_class = PostSerializer
     queryset = Post.objects.filter(status=True)
 
@@ -100,26 +102,27 @@ class PostDetail(APIView):
 
 
 class PostDetail(RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     serializer_class = PostSerializer
     queryset = Post.objects.filter(status=True)
 
 
+# /blog/api/v1/post is connected to PostModelViewSet not PostList
 class PostModelViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     serializer_class = PostSerializer
     queryset = Post.objects.filter(status=True)
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
-    filterset_fields = {
-        "author": ["exact", "in"],
-        "category": ["exact", "in"],
-    }
+    # filterset_fields = {
+    #     "author": ["exact", "in"],
+    #     "category": ["exact", "in"],
+    # }
     search_fields = ["title", "content"]
     ordering_fields = ["published_date"]
     pagination_class = DefaultPagination
 
 
 class CategoryModelViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     serializer_class = CategorySerializer
     queryset = Category.objects.all()

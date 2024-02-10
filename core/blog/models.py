@@ -14,7 +14,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
     category = models.ForeignKey(
-        "Category", on_delete=models.SET_NULL, null=True
+        "Category", on_delete=models.SET_NULL, null=True, blank=True
     )
     status = models.BooleanField(default=False)
     created_date = models.DateTimeField(auto_now_add=True)

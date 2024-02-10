@@ -14,9 +14,7 @@ urlpatterns = [
         views.RegistrationApiView.as_view(),
         name="registration",
     ),
-    path(
-        "api-token-auth/", views.CustomAuthToken.as_view(), name="auth-token"
-    ),
+    path("api-token-auth/", views.CustomAuthToken.as_view(), name="auth-token"),
     # test
     path("test/", views.TestEmail.as_view(), name="test"),
     # activation

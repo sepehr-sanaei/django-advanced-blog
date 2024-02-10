@@ -12,3 +12,6 @@ djoser
 # clean code
 black
 flake8
+# test
+pytest
+pytest-django

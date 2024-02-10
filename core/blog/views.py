@@ -31,7 +31,7 @@ class IndexView(TemplateView):
 
 
 class PostListView(ListView):
-    permission_required = "blog.view_post"
+    # permission_required = "blog.view_post"
     queryset = Post.objects.all()
     # model = Post
     context_object_name = "posts"
