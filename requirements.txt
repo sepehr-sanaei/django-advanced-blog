@@ -9,6 +9,7 @@ coreapi
 djangorestframework-simplejwt
 django-mail-templated
 djoser
+django-cors-headers
 # clean code
 black
 flake8
