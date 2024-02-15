@@ -1,19 +1,32 @@
-django>4.2,<4.3
+# general  modules
+django >3.2,<3.3
 python-decouple
-pillow
+Pillow
 djangorestframework
-markdown       # Markdown support for the browsable API.
-django-filter
+
+
+# third party modules
+markdown       
+django-filter  
 drf-yasg[validation]
-coreapi
 djangorestframework-simplejwt
-django-mail-templated
 djoser
 django-cors-headers
-# clean code
+
+# deployment module
+gunicorn
+
+# email third party modules
+django-mail-templated
+
+# refactoring and tests
 black
 flake8
-# test
 pytest
 pytest-django
-faker
+Faker
+
+# background proccess and cache
+celery
+redis
+django-redis
