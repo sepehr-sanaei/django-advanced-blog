@@ -172,3 +172,4 @@ EMAIL_HOST_PASSWORD = ""
 
 # django-cors-headers configuration settings
 CORS_ALLOW_ALL_ORIGINS = True
+CELERY_BROKER_URL = "redis://redis:6379/0"

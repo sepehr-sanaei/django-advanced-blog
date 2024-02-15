@@ -16,6 +16,8 @@ django-cors-headers
 # deployment module
 gunicorn
 
+# coreapi
+coreapi
 # email third party modules
 django-mail-templated
 
